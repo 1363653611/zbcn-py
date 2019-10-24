@@ -363,7 +363,6 @@ print(sum)
   
   - yield from 
     - yield from iterable 本质上就是一个简短的形式：for item in iterable: yield item
- 
 
 #### 元组
 
