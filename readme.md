@@ -1,5 +1,4 @@
-class Student(object):
-    pass## python 基础学习笔记 ###
+### python 基础学习笔记 ###
 
 ### 变量
 
