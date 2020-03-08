@@ -161,7 +161,24 @@ print(sum)
     - lambda 匿名函数
 
     - 装饰器 (注解)
-
+        
+        - 函数可以被看成对象，而且可以被赋值给变量，所以通过变量可以调用函数
+        - 加入我们想要增强还苏的功能，但是不想修改函数的定义和结构。这种在运行期间动态增加功能的方式称之为装饰器（Decorator） 
+        - decorator 是一个返回函数的高阶函数
+           ```python
+          # 定义： 以函数作为参数
+          def log(func):
+              def wrapper(*args, **kw):
+                  print('call %s():' % func.__name__)
+                  return func(*args, **kw)
+              return wrapper
+          
+          # 使用：借助于Python的@语法，把decorator置于函数的定义处：相当于执行了：`now = log(now)`
+          @log
+          def now():
+              print('2015-3-25')
+          
+           ```
     - 偏函数
         * functools.partial就是帮助我们创建一个偏函数
         `int2 = functools.partial(int, base=2)`
@@ -190,7 +207,6 @@ print(sum)
 
     - 其他：
         ```python
-
         str1 = 'hello, world!'
         # 通过内置函数len计算字符串的长度
         print(len(str1)) # 13
@@ -227,7 +243,7 @@ print(sum)
         # 获得字符串修剪左右两侧空格之后的拷贝
         print(str3.strip())
         ```
-#### 列表
+#### 列表（list）
 
 1. 定义：一种结构化的、非标量类型，它是值的有序序列，每个值都可以通过索引进行标识，定义列表可以将列表的元素放在[]中，多个元素用,进行分隔，可以使用for循环对列表元素进行遍历，也可以使用[]或[:]运算符取出列表中的一个或多个元素
 
@@ -318,13 +334,38 @@ print(sum)
     list1.sort(reverse=True)
     print(list1)
     ```
+   
+#### 元组（tuple） ####  
+1. 一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改
+2. Python在显示只有1个元素的tuple时，也会加一个逗号,以免误解成数学计算意义上的括号 `t = (1,)`
+
+#### 字典值（dict） ####
+1. Python内置了字典：dict的支持，dict全称dictionary，类似与java语言中的 `map`，使用键-值（key-value）存储，具有极快的查找速度
+  - 定义 ：`d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}`  
+  - 取value值：
+    ```python
+    d['Michael']  # 值不存在，抛出异常
+    d.get('Michael') #值不存在，返回None
+    d.pop('Michael') #获取值后，会删除dic 的值
+    ```
+2. dict 的特点(相对与list):  
+  查找和插入的速度极快，不会随着key的增加而变慢；  
+  需要占用大量的内存，内存浪费多。  
+  **而list相反**：  
+  查找和插入的时间随着元素的增加而增加；  
+  占用空间小，浪费内存很少。
+
+#### set ####
+1. set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
+2. 要创建一个set，需要提供一个list作为输入集合 `s = set([1, 2, 3])`
+3. 添加元素 `add(key)`
+4. 删除元素 `remove(key)`
 
 #### 生成式 和生成器
 
 1. 生成式 生成器使用
     ```python
     import sys
-
     f = [x for x in range(1, 10)]
     print(f)
     f = [x + y for x in 'ABCDE' for y in '1234567']
@@ -760,3 +801,20 @@ print(sum)
       * 类继承的父类集合；
 
       * 类的方法集合。
+
+### 模块、包
+
+- 在python 中，一个 .py 文件就是一个模块module
+    - 自己创建的模块，不能和python自带的模块冲突，否则，无法导入系统自带的模块。
+- python又引入了按目录来组织模块的方法，称为包（Package）（文件夹）
+    - 每一个包目录下面都会有一个`__init__.py`的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。
+    
+#### 模块使用：
+
+##### 模块作用域
+- 私有的 `private`：_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等
+
+##### 第三方模块：
+- sys 模块
+    - sys模块有一个argv变量，用list存储了命令行的所有参数。argv至少有一个元素，因为第一个参数永远是该.py文件的名称
+    

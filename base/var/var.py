@@ -60,4 +60,4 @@ if __name__ == '__main__':
 	# var()
 	# check_type()
 	input_test()
-	str()
+	# str()

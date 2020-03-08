@@ -41,10 +41,9 @@ class Spider():
 		# 用来获取搜索关键词得到的结果总页面数,用totalPagenum记录。由于数字是夹在形如：1,985 Wallpapers found for “dog”的string中，
 		# 所以需要用个小函数，提取字符串中的数字保存到列表numlist中，再逐个拼接成完整数字。。。
 		total = ""
-		url = ("https://alpha.wallhaven.cc/search?q={}&categories=111&purity=100&sorting=relevance&order=desc").format(
-			keyWord)
+		url = ("https://alpha.wallhaven.cc/search?q={}&categories=111&purity=100&sorting=relevance&order=desc").format(keyWord)
 		html = requests.get(url)
-		selector = etree.HTML(html.text)
+		selector = etree.HTML(html.content)
 		pageInfo = selector.xpath('//header[@class="listing-header"]/h1[1]/text()')
 		string = str(pageInfo[0])
 		numlist = list(filter(str.isdigit, string))
@@ -52,7 +51,7 @@ class Spider():
 			total += item
 		totalPagenum = int(total)
 		return totalPagenum
-
+	
 	def main_fuction_1(self):
 		# count是总图片数，times是总页面数
 		self.creat_File()
@@ -127,5 +126,6 @@ class Spider():
 
 
 spider = Spider()
-# spider.main_fuction_1()
-spider.main_fuction_2()  # 多线程
+spider.main_fuction_1()
+
+#spider.main_fuction_2()  # 多线程

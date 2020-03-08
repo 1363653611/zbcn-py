@@ -1,0 +1,38 @@
+import random
+"""
+（1）使用random库，采用0x1010作为随机种子。
+
+（2）密码由26个字母的大小写，10个数字字符和！@#￥%……&*等8个字符组成。
+
+（3）每个密码长度固定在10个字符。
+
+（4）程序运行每次产生20个密码，每个密码一行。
+
+（5）每次长生的20个密码保存在“随机密码.txt”文件中
+"""
+### 设置随机种子
+random.seed(0x1010)
+# 设置种子选择空间
+s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*"
+#存取密码的列表
+ls = []
+#存取第一个密码的字符
+FirstPsw = ""
+
+# 十个随机密码
+while len(ls) < 20:
+    pwd = ""
+    for i in range(10):
+        pwd += s[random.randint(0, len(s)-1)]
+        if pwd[0] in FirstPsw:
+            continue
+        else:
+            FirstPsw += pwd[0]
+    ls.append(pwd)
+
+print("每个密码的第一个字符为: %s" % FirstPsw)
+fo = open("随机密码.txt","w",encoding ="utf-8")
+fo.write("\n".join(ls))
+fo.close()
+
+

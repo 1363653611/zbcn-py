@@ -6,7 +6,7 @@ logging 配置文件
 import os
 import logging.config
 # 定义三种日志输出格式
-standard_format = '[%(asctime) -s][%(threadName)s:%(thread)d][task_id:%(name)s][%(filename)s:%(lineno)d]' \
+standard_format = '[%(asctime) -s][%(threadName)s:%(thread1)d][task_id:%(name)s][%(filename)s:%(lineno)d]' \
                   '[%(levelname)s][%(message)s]'
 
 simple_format = '[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)s'

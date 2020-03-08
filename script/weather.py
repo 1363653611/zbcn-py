@@ -26,14 +26,16 @@ class SearchWeather():
 
 	def getcityCode(self, cityName):
 		SQL = "SELECT cityCode FROM cityWeather WHERE cityName='%s'" % cityName
-		try:
-			with self.CONNECTION.cursor() as cursor:
-				cursor.execute(SQL)
-				self.CONNECTION.commit()
-				result = cursor.fetchone()
-				return result['cityCode']
-		except Exception as e:
-			print(repr(e))
+		# try:
+		# 	with self.CONNECTION.cursor() as cursor:
+		# 		cursor.execute(SQL)
+		# 		self.CONNECTION.commit()
+		# 		result = cursor.fetchone()
+		# 		return result['cityCode']
+		# except Exception as e:
+		# 	print(repr(e))
+
+		return city.get(cityName)
 
 	def getWeather(self, cityCode, cityname):
 		url = 'http://www.weather.com.cn/weather/%s.shtml' % cityCode
@@ -84,6 +86,14 @@ class SearchWeather():
 		detail = self.getWeather(cityCode, city)
 		print (detail)
 
+
+city = {
+	u'北京': '101010100',
+	u'海淀': '101010200',
+	u'福州': '101230101',
+	u'浦城': '101230906',
+
+}
 
 if __name__ == "__main__":
 	weather = SearchWeather()
