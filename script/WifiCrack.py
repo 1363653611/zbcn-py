@@ -5,7 +5,12 @@ import time
 import pywifi
 from pywifi import const
 
+
 class MY_GUI():
+    """
+    wifi 密码 破解功能
+    """
+
     def __init__(self, init_window_name):
         self.get_wifimm_value = None
         self.init_window_name = init_window_name
@@ -38,8 +43,8 @@ class MY_GUI():
         labelframe = LabelFrame(width=400, height=200, text="配置")
         labelframe.grid(column=0, row=0, padx=10, pady=10)
 
-        self.search = Button(labelframe, text="搜索附近WiFi", command=self.scans_wifi_list).grid(column=0 , row=0)
-        self.pojie = Button(labelframe,text="开始破解",command=self.readPassWord).grid(column=1,row=0)
+        self.search = Button(labelframe, text="搜索附近WiFi", command=self.scans_wifi_list).grid(column=0, row=0)
+        self.pojie = Button(labelframe, text="开始破解", command=self.readPassWord).grid(column=1, row=0)
 
         self.label = Label(labelframe, text="目录路径：").grid(column=0, row=1)
 
@@ -53,7 +58,8 @@ class MY_GUI():
 
         self.wifi_mm_text = Label(labelframe, text="WiFi密码：").grid(column=2, row=2)
 
-        self.wifi_mm_input = Entry(labelframe, width=10, textvariable=self.get_wifimm_value).grid(column=3, row=2,sticky=tkinter.W)
+        self.wifi_mm_input = Entry(labelframe, width=10, textvariable=self.get_wifimm_value).grid(column=3, row=2,
+                                                                                                  sticky=tkinter.W)
 
         self.wifi_labelframe = LabelFrame(text="wifi列表")
         self.wifi_labelframe.grid(column=0, row=3, columnspan=4, sticky=NSEW)
@@ -181,4 +187,3 @@ def gui_start():
 
 
 gui_start()
-
